@@ -1079,7 +1079,7 @@ get_device_id(usb_printer_t *printer,	/* I - Printer */
     length = (int)((((unsigned)buffer[1] & 255) << 8) | ((unsigned)buffer[0] & 255));
 
   if (length > bufsize)
-    length = bufsize;
+    length = (int)bufsize;
 
   if (length < 14)
   {
@@ -1403,8 +1403,8 @@ make_device_uri(
   else
     options[0] = '\0';
 
-  httpAssembleURIf(HTTP_URI_CODING_ALL, uri, uri_size, "usb", NULL, mfg, 0,
-		   "/%s%s", mdl, options);
+  httpAssembleURIf(HTTP_URI_CODING_ALL, uri, (int)uri_size, "usb", NULL, mfg,
+		   0, "/%s%s", mdl, options);
 
   cupsFreeOptions(num_values, values);
 
@@ -1841,7 +1841,7 @@ sidechannel_thread(void *reference)
 	  else
 	  {
 	    status  = CUPS_SC_STATUS_OK;
-	    datalen = strlen(data);
+	    datalen = (int)strlen(data);
 	  }
 	  cupsSideChannelWrite(command, CUPS_SC_STATUS_OK, data, datalen, 1.0);
 

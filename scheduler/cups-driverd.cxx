@@ -2611,7 +2611,7 @@ load_ppds_dat(char   *filename,		/* I - Filename buffer */
         ppdsync == PPD_SYNC &&
         !stat(filename, &fileinfo) &&
 	(((size_t)fileinfo.st_size - sizeof(ppdsync)) % sizeof(ppd_rec_t)) == 0 &&
-	(num_ppds = ((size_t)fileinfo.st_size - sizeof(ppdsync)) / sizeof(ppd_rec_t)) > 0)
+	(num_ppds = (int)(((size_t)fileinfo.st_size - sizeof(ppdsync)) / sizeof(ppd_rec_t))) > 0)
     {
      /*
       * We have a ppds.dat file, so read it!
